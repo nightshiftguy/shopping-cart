@@ -11,5 +11,6 @@ describe("NavBar component", () => {
     render(<RouterProvider router={router}><NavBar /></RouterProvider>);
 
     expect(screen.getByRole('link',{name: 'Homepage'})).toBeInTheDocument();
+    expect(screen.getByRole('link',{name: 'Shop'})).toBeInTheDocument();
   });
 });
