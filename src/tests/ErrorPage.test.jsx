@@ -4,7 +4,7 @@ import ErrorPage from "../components/ErrorPage";
 import { createMemoryRouter, MemoryRouter } from "react-router";
 import routes from "../routes";
 
-describe("Error page", ()=>{
+describe("ErrorPage component", ()=>{
     it("Renders link to main page", ()=>{
         const router = createMemoryRouter(routes);
         render(<MemoryRouter router={router}><ErrorPage/></MemoryRouter>);

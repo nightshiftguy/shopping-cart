@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect} from "vitest";
-import HomePage from "../components/HomePage";
+import HomePage from "/src/components/HomePage";
 import { createMemoryRouter, MemoryRouter } from "react-router";
 import routes from "../routes";
 
-describe("Home page", ()=>{
+describe("HomePage component ", ()=>{
     it("Renders welcome message", ()=>{
         const router = createMemoryRouter(routes);
         render(<HomePage/>);
