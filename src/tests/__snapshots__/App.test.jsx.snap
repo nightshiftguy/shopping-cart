@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App component > Adds existing items to cart 1`] = `"[{"id":1,"title":"item2","count":6}]"`;
+
+exports[`App component > Adds items in cart 1`] = `"[{"id":0,"title":"item1","count":2},{"id":1,"title":"item2","count":3}]"`;
+
+exports[`App component > Decreases items count cart 1`] = `"[{"id":1,"title":"item2","count":2}]"`;
+
+exports[`App component > Removes from cart when count reaches 0 1`] = `"[]"`;
+
+exports[`App component > Removes items from cart 1`] = `"[]"`;

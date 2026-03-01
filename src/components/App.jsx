@@ -1,47 +1,54 @@
 import { Outlet } from 'react-router'
 import NavBar from './NavBar'
 import '/src/styles/App.css'
-import { useState, useEffect } from 'react'
-
-const useItems = ()=>{
-  const [items, setItems] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(()=>{
-    fetch('https://fakestoreapi.com/products')
-    .then((response)=>{
-      if(response.status >= 400){
-        throw new Error("server error");
-      }
-      return response.json();
-    })
-    .then((response)=>{
-      setItems(response);
-      setError(null);
-    })
-    .catch((error) => {
-      setError(error)
-      setItems(null)
-    })
-    .finally(() => setLoading(false));
-  } ,[]);
-
-  return { items, error, loading };
-}
+import useItems from '/src/useItems'
+import { useState } from 'react'
 
 function App() {
+  const [itemsInCart, setItemsInCart] = useState([]);
   const { items, error, loading } = useItems();
 
   function handleAddToCart(itemId, itemCount){
-    console.log("Add item to cart: "+items[itemId].title+" count: "+itemCount)
+    let newItems = [...itemsInCart];
+    let itemIndex = newItems.findIndex((item)=>item.id===itemId);
+    if(itemIndex<0){
+      //item don't exists - itemIndex=-1
+      newItems.push({...items[itemId], count: itemCount});
+    }else{
+      //item already in cart - add count
+      let newItem = newItems[itemIndex];
+      newItem = {...newItem, count: newItem.count+itemCount};
+      newItems[itemIndex] = newItem;
+    }
+
+    setItemsInCart(newItems);
+  }
+
+  function handleRemoveFromCart(itemId, itemCount=undefined){
+    let newItems = [...itemsInCart];
+    let itemIndex = newItems.findIndex((item)=>item.id===itemId);
+    if(itemIndex<0){
+      //item don't exists - itemIndex=-1
+      return null;
+    } else if(itemCount===undefined || newItems[itemIndex].count - itemCount <= 0){
+      //delete whole item in cart
+      newItems = newItems.filter((item)=>item.id!==itemId)
+    } else{
+      //decrease itemCount
+      let newItem = newItems[itemIndex];
+      let newCount = newItem.count - itemCount;
+      
+      newItem = {...newItem, count: newCount};
+      newItems[itemIndex] = newItem;
+    }
+    setItemsInCart(newItems);
   }
 
   return (
     <>
     <NavBar/>
     <main>
-      <Outlet context={{items, error, loading, handleAddToCart}}/>
+      <Outlet context={{items, error, loading, itemsInCart, handleAddToCart, handleRemoveFromCart}}/>
     </main>
     </>
   )
