@@ -7,6 +7,9 @@ export default function NavBar({itemsInCart}){
             <div className="left">
                 <Link to='/'>Homepage</Link>
                 <Link to='/shop'>Shop</Link>
+            </div>
+            <div className="right">
+                <Link to='/cart'>Cart</Link>
                 {itemCount>0 && <p data-testid="itemCount">Items in cart: {itemCount}</p>}
             </div>
         </nav>

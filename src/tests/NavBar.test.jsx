@@ -12,6 +12,7 @@ describe("NavBar component", () => {
 
     expect(screen.getByRole('link',{name: 'Homepage'})).toBeInTheDocument();
     expect(screen.getByRole('link',{name: 'Shop'})).toBeInTheDocument();
+    expect(screen.getByRole('link',{name: 'Cart'})).toBeInTheDocument();
   });
 
   it("don't shows count of items in cart when it's empty", () => {

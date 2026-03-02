@@ -9,3 +9,5 @@ exports[`App component > Decreases items count cart 1`] = `"[{"id":1,"title":"it
 exports[`App component > Removes from cart when count reaches 0 1`] = `"[]"`;
 
 exports[`App component > Removes items from cart 1`] = `"[]"`;
+
+exports[`App component > Sets item count 1`] = `"[{"id":0,"title":"item1","count":10}]"`;

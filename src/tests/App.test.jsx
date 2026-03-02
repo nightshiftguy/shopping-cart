@@ -40,7 +40,7 @@ describe("App component", () => {
     vi.mock('/src/components/HomePage', ()=>(
       {
         default : ()=>{
-          const {handleAddToCart, itemsInCart, handleRemoveFromCart} = useOutletContext();
+          const {handleAddToCart, itemsInCart, handleRemoveFromCart, setItemCount} = useOutletContext();
           return (
             <>
               <p data-testid="items">{JSON.stringify(itemsInCart)}</p>
@@ -50,6 +50,7 @@ describe("App component", () => {
               <button data-testid="removeFromCart1" onClick={()=>handleRemoveFromCart(1)}></button>
               <button data-testid="removeFromCart2" onClick={()=>handleRemoveFromCart(1,1)}></button>
               <button data-testid="removeFromCart3" onClick={()=>handleRemoveFromCart(1,3)}></button>
+              <button data-testid="setCount" onClick={()=>setItemCount(0,10)}></button>
             </>
           );
         }
@@ -157,6 +158,30 @@ describe("App component", () => {
 
     await user.click(screen.getByTestId('addToCart2'));
     await user.click(screen.getByTestId('removeFromCart3'));
+
+    expect(screen.getByTestId('items').textContent).toMatchSnapshot();
+  });
+
+  it("Sets item count", async () => {
+    const routes = [
+      {
+        path: '/',
+        element: <App/>,
+        children: [
+          {
+            index: true,
+            element: <HomePage/>
+          },
+        ]
+      }
+    ]
+    const user = userEvent.setup();
+    const router = createMemoryRouter(routes);
+    
+    render(<RouterProvider router={router}><App /></RouterProvider>);
+
+    await user.click(screen.getByTestId('addToCart1'));
+    await user.click(screen.getByTestId('setCount'));
 
     expect(screen.getByTestId('items').textContent).toMatchSnapshot();
   });
