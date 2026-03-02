@@ -46,7 +46,7 @@ function App() {
 
   return (
     <>
-    <NavBar/>
+    <NavBar itemsInCart={itemsInCart}/>
     <main>
       <Outlet context={{items, error, loading, itemsInCart, handleAddToCart, handleRemoveFromCart}}/>
     </main>
