@@ -4,7 +4,7 @@ import { createMemoryRouter, RouterProvider, useOutletContext } from "react-rout
 import routes from '/src/routes'
 
 import App from "/src/components/App";
-import HomePage from "/src/components/Homepage";
+import HomePage from "/src/components/HomePage";
 import userEvent from "@testing-library/user-event";
 
 describe("App component", () => {

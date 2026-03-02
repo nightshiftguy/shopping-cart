@@ -1,5 +1,5 @@
 import ErrorPage from "./components/ErrorPage";
-import HomePage from "./components/Homepage";
+import HomePage from "./components/HomePage";
 import Shop from "./components/Shop";
 import App from "/src/components/App";
 import Cart from "/src/components/Cart";
